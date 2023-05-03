@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   darkMode: ['class'],
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -19,7 +21,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        primary: 'Poppins',
+        primary: ['Poppins', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: '#222222',
