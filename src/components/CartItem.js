@@ -14,25 +14,25 @@ const CartItem = ({item}) => {
         </Link>
         <div className='w-full flex flex-col'>
           <div className='flex justify-between mb-2'>
-            <Link to={`/product/${id}`} className='text-sm uppercase font-medium max-w-[240px] text-primary hover:underline'>
+            <Link to={`/product/${id}`} className='text-sm uppercase font-medium max-w-[240px] text-primary hover:underline dark:text-white md:text-[18px]'>
               {title}
             </Link>
             <div onClick={() => removeFromCart(id)} className='text-xl cursor-pointer'>
-              <IoMdClose className='text-gray-500 hover:text-red-500 transition' />
+              <IoMdClose className='text-gray-500 hover:text-red-500 transition dark:text-white' />
             </div>
           </div>
           <div className='flex gap-x-2 h-[36px] text-sm'>
             <div className='flex flex-1 max-w-[100px] items-center h-full border text-primary font-medium'>
             <div onClick={() => decreaseAmount(id)} className='flex-1 h-full flex justify-center items-center cursor-pointer '>
-            <IoMdRemove />
+            <IoMdRemove className='dark:text-white xxxl:text-[24px]' />
             </div>
-            <div className='h-full flex justify-center items-center px-2'>{amount}</div>
+            <div className='h-full flex justify-center items-center px-2 dark:text-gray-100 md:text-[18px] xxxl:text-[22px]'>{amount}</div>
              <div onClick={() => increaseAmount(id)} className='flex-1 h-full flex justify-center items-center cursor-pointer'>
-            <IoMdAdd />
+            <IoMdAdd className='dark:text-white xxxl:text-[24px]' />
             </div>
             </div>
-            <div className='flex-1 flex items-center justify-around'>${price}</div>
-            <div className='flex-1 flex justify-end items-center text-primary font-medium'>{`$ ${parseFloat(price * amount).toFixed(2)}`}</div>
+            <div className='flex-1 flex items-center justify-around dark:text-gray-100 md:text-[18px] xxxl:text-[24px]'>${price}</div>
+            <div className='flex-1 flex justify-end items-center text-primary font-medium dark:text-gray-200 md:text-[18px] xxxl:text-[24px]'>{`$ ${parseFloat(price * amount).toFixed(2)}`}</div>
 
           </div>
         </div>

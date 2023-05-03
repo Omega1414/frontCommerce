@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: ['class'],
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     fontFamily: {
@@ -26,6 +27,7 @@ module.exports = {
       backgroundImage: {
         hero: "url('./img/bg_hero.svg')",
         lightImg: "url('./img/bg_light.jpg')",
+        darkImg: "url('./img/bg_dark.jpg')",
       },
     },
   },
