@@ -2,9 +2,7 @@ module.exports = {
   darkMode: ['class'],
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    fontFamily: {
-      primary: 'Poppins',
-    },
+  
     container: {
       padding: {
         DEFAULT: '30px',
@@ -20,6 +18,9 @@ module.exports = {
       xxxl: '2100px'
     },
     extend: {
+      fontFamily: {
+        primary: 'Poppins',
+      },
       colors: {
         primary: '#222222',
         secondary: '#F5E6E0',
