@@ -19,7 +19,7 @@ const Header = ({theme, setTheme, handleThemeSwitch}) => {
     <div className='container mx-auto flex items-center justify-between h-full'>
     <Link to={'/'}>
         <div >
-          <img className='w-[40px] md:w-[45px]  lg:w-[50px] xl:w-[40px]  xxxl:w-[60px] ml-1' src={Logo} alt="" />
+          <img className='w-[40px] md:w-[45px]  lg:w-[50px] xl:w-[30px]  xxxl:w-[60px] ml-1' src={Logo} alt="" />
         </div>
       </Link>
       <div>
@@ -28,7 +28,7 @@ const Header = ({theme, setTheme, handleThemeSwitch}) => {
                         <svg
                         v-if="dark"
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-4.5 w-5 md:h-9.6 md:w-10"
+                        class="h-4.5 w-5 md:h-7.5 md:w-8"
                         viewBox="0 0 20 20"
                         fill="black"
                       >
@@ -40,7 +40,7 @@ const Header = ({theme, setTheme, handleThemeSwitch}) => {
                       <svg
                       v-else
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-4.5 w-5  md:h-9.6 md:w-10"
+                      class="h-4.5 w-5  md:h-7.5 md:w-8"
                       viewBox="0 0 20 20"
                       fill="white"
                     >
@@ -56,7 +56,7 @@ const Header = ({theme, setTheme, handleThemeSwitch}) => {
   </button>
       </div>
       <div onClick={() => setIsOpen(!isOpen)} className='cursor-pointer flex relative mr-3'>
-        <BsBag  className='text-[30px] md:text-[50px] lg:text-[50px] xl:text-[30px]  xxxl:text-[60px] dark:text-white' />
+        <BsBag  className='text-[30px] md:text-[50px] lg:text-[50px] xl:text-[25px]  xxxl:text-[60px] dark:text-white' />
         <div className='bg-red-500 absolute -right-1 sm:-right-1 md:-right-1 lg:-right-1 xl:-right-1 -bottom-2 xxl:-bottom-1 xxxl:-bottom-2 text-[12px] md:text-[22px] lg:text-[22px] w-[18px] h-[18px] md:w-[30px] md:h-[30px] lg:w-[23px] lg:h-[23px] text-white rounded-full flex justify-center items-center xl:text-[16px] xl:w-[20px] xl:h-[20px]  xxxl:text-[28px] xxxl:w-[34px] xxxl:h-[34px]'>
         {itemAmount}
         </div>
