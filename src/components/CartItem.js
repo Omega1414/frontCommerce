@@ -31,7 +31,7 @@ const CartItem = ({item}) => {
             <IoMdAdd className='dark:text-white xxxl:text-[24px]' />
             </div>
             </div>
-            <div className='flex-1 flex items-center justify-around dark:text-gray-100 md:text-[18px] xxxl:text-[24px]'>${price}</div>
+            <div className='flex-1 flex items-center justify-around font-primary font-normal dark:text-gray-100 md:text-[18px] xxxl:text-[24px]'>${price}</div>
             <div className='flex-1 flex justify-end items-center text-primary font-medium dark:text-gray-200 md:text-[18px] xxxl:text-[24px]'>{`$ ${parseFloat(price * amount).toFixed(2)}`}</div>
 
           </div>
