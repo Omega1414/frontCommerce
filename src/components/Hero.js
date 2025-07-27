@@ -12,7 +12,8 @@ const Hero = () => {
     src={femaleImg}
     alt="Female Model"
     className="w-full h-full object-cover object-top transition-transform duration-700 ease-in-out md:scale-100 scale-125"
-    style={{ transformOrigin: 'top center' }} // zoom-un əsas nöqtəsi yuxarı mərkəz
+    style={{ transformOrigin: 'top center' }} 
+    loading='lazy'
   />
 </div>
         <div className="w-full md:w-1/2 h-1/2 md:h-full">
@@ -20,6 +21,7 @@ const Hero = () => {
             src={maleImg}
             alt="Male Model"
             className="w-full h-full object-cover object-top"
+            loading='lazy'
           />
         </div>
       </div>
@@ -30,10 +32,7 @@ const Hero = () => {
       {/* Content */}
       <div className="container mx-auto flex justify-center items-center h-full relative w-full">
         <div className="flex flex-col justify-center items-center text-center text-white w-full h-full relative px-4">
-
-          {/* --- Desktop: New Trend, Heading və Shop Links (altında) --- */}
           <div className="hidden md:flex flex-col items-center ">
-            {/* New Trend */}
             <div className="h-[2px] bg-white w-full max-w-[100px] mb-1"></div>
             <div className="uppercase font-semibold animatecss animatecss-fadeInLeft animatecss-slow">
               New Trend
@@ -64,8 +63,6 @@ const Hero = () => {
 </div>
 
           </div>
-
-          {/* --- Mobile: Shop Men yuxarı sağ küncdə --- */}
           <a
             href="#men"
             className="md:hidden uppercase font-semibold border-b-2 border-white animatecss animatecss-fadeInLeft animatecss-slow absolute right-4 bottom-[55%]"
@@ -80,8 +77,6 @@ const Hero = () => {
             Stylish Summer Sale  <br />
             <span className="font-semibold">FEEL THE SUN</span>
           </h1>
-
-          {/* --- Mobile: Shop Women solda aşağıda --- */}
           <a
             href="#women"
             className="md:hidden uppercase font-semibold border-b-2 border-white animatecss animatecss-fadeInRight animatecss-slow absolute bottom-6 left-4"
