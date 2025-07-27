@@ -56,7 +56,9 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
             ? theme === 'light'
               ? 'bg-gray-100 py-4 shadow-md bg-opacity-80'
               : 'bg-gray-900 py-4 shadow-md bg-opacity-80'
-            : 'bg-none py-6'
+            : theme === 'light'
+              ? 'bg-gray-100 py-4 shadow-md bg-opacity-10'
+              : 'bg-gray-900 py-4 shadow-md bg-opacity-10'
           }
         `}
         onMouseLeave={handleMouseLeave}

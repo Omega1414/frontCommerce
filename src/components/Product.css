@@ -1,0 +1,17 @@
+/* src/components/Product.css */
+.gallery-item {
+  will-change: transform, opacity;
+}
+
+.gallery-item:nth-child(3n+1) {
+  transform-origin: left center;
+}
+
+.gallery-item:nth-child(3n+2) {
+  transform-origin: center center;
+}
+
+.gallery-item:nth-child(3n+3) {
+  transform-origin: right center;
+}
+

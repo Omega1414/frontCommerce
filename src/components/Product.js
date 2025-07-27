@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import galleryItems from './galleryData';
+import './Product.css'; // Import the CSS file
 
 const Product = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -35,13 +36,13 @@ const Product = () => {
 
     // Animation variants for gradient overlay
     const gradientVariants = {
-      initial: { opacity: 0.4 },
-      hover: { opacity: 0.8, transition: { duration: 0.5, ease: 'easeInOut' } }
+      initial: { opacity: 0.3 }, // Reduced initial opacity for better shadow visibility
+      hover: { opacity: 0.7, transition: { duration: 0.5, ease: 'easeInOut' } }
     };
 
     // Animation variants for text content
     const textVariants = {
-      initial: { y: 20, opacity: 0.9 },
+      initial: { y: 20, opacity: 1 },
       hover: { y: 0, opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } }
     };
 
@@ -101,35 +102,50 @@ const Product = () => {
           />
 
           {/* Text Content */}
-          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-            <motion.div variants={textVariants}>
-              <div className="h-[1px] bg-white w-12 mb-3"></div>
-              <p className="text-sm font-light uppercase tracking-wider mb-2">
-                {item.subtitle}
-              </p>
-            </motion.div>
+  <motion.div
+  className="absolute inset-0 flex flex-col justify-end text-white"
+>
+  {/* Text background overlay */}
+  <motion.div
+    className="absolute bottom-0 left-0 w-full h-1/4 bg-black z-0"
+    variants={{
+      initial: { opacity: 0.1 },
+      hover: { opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }
+    }}
+  />
 
-            <motion.h3
-              className="text-2xl md:text-3xl font-light mb-4"
-              variants={textVariants}
-            >
-              {item.title}
-            </motion.h3>
+  {/* Text Content */}
+  <div className="relative z-10 p-8">
+    <motion.div variants={textVariants}>
+      <div className="h-[1px] bg-white text-gray-200 w-12 mb-3"></div>
+      <p className="text-sm font-normal uppercase tracking-wider mb-2 ">
+        {item.subtitle}
+      </p>
+    </motion.div>
 
-            <AnimatePresence>
-              {isHovered && (
-                <motion.p
-                  className="text-sm leading-relaxed max-w-md"
-                  variants={descriptionVariants}
-                  initial="initial"
-                  animate="hover"
-                  exit="initial"
-                >
-                  {item.description}
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
+    <motion.h3
+      className="text-2xl md:text-3xl font-normal text-gray-100 mb-2 "
+      variants={textVariants}
+    >
+      {item.title}
+    </motion.h3>
+
+    <AnimatePresence>
+      {isHovered && (
+        <motion.p
+          className="text-sm leading-relaxed max-w-md"
+          variants={descriptionVariants}
+          initial="initial"
+          animate="hover"
+          exit="initial"
+        >
+          {item.description}
+        </motion.p>
+      )}
+    </AnimatePresence>
+  </div>
+</motion.div>
+
 
           {/* Border on Hover */}
           <motion.div
@@ -185,24 +201,6 @@ const Product = () => {
           </div>
         </motion.div>
       </div>
-
-      <style>{`
-        .gallery-item {
-          will-change: transform, opacity;
-        }
-
-        .gallery-item:nth-child(3n+1) {
-          transform-origin: left center;
-        }
-
-        .gallery-item:nth-child(3n+2) {
-          transform-origin: center center;
-        }
-
-        .gallery-item:nth-child(3n+3) {
-          transform-origin: right center;
-        }
-      `}</style>
     </section>
   );
 };
