@@ -1,42 +1,210 @@
-import React, { useContext } from 'react';
-import { Link} from 'react-router-dom'
-import {BsPlus, BsEyeFill} from 'react-icons/bs' 
-import { CartContext } from '../contexts/CartContext';
-import { toast } from 'react-toastify';
+// src/components/Product.js
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import galleryItems from './galleryData';
 
-const Product = ({product}) => {
-  const {addToCart} = useContext(CartContext)
-  const {id, image, category, title, price} = product
-  return <div >
-  <div className='border border-[#e4e4e4] h-[300px] mb-4 relative overflow-hidden group transition dark:bg-white'>
-    <div className='w-full h-full flex justify-center items-center '>
-    <div className='w-[200px] mx-auto flex justify-center items-center  '>
-      <img className='max-h-[160px] group-hover:scale-110 transition duration-300 ' src={image} alt="" />
-    </div>
-    </div>
-    <div className='absolute top-6 lg:-right-11 lg:group-hover:right-5 p-2 flex flex-col items-center justify-center gap-y-2 lg:opacity-0 lg:group-hover:opacity-100  transition-all duration-300'>
-      <button onClick={ () => {
-        addToCart(product, id)
-        toast.success("Successfully added")}
-        }>
-        <div className='flex justify-center items-center text-white w-12 h-12 bg-red-500'>
-          <BsPlus className='text-3xl' />
+const Product = () => {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const GalleryItem = ({ item, index }) => {
+    const isHovered = hoveredIndex === index;
+
+    // Animation variants for the container
+    const containerVariants = {
+      initial: { scale: 1, rotate: 0, opacity: 1 },
+      hover: { 
+        scale: 1.02, 
+        rotate: 0.5, 
+        transition: { 
+          duration: 0.7, 
+          ease: [0.4, 0, 0.2, 1]
+        }
+      }
+    };
+
+    // Animation variants for images
+    const imageVariants = {
+      initial: { opacity: 1 },
+      hover: { opacity: 0, transition: { duration: 0.7, ease: 'easeInOut' } }
+    };
+
+    const secondImageVariants = {
+      initial: { opacity: 0 },
+      hover: { opacity: 1, transition: { duration: 0.7, ease: 'easeInOut' } }
+    };
+
+    // Animation variants for gradient overlay
+    const gradientVariants = {
+      initial: { opacity: 0.4 },
+      hover: { opacity: 0.8, transition: { duration: 0.5, ease: 'easeInOut' } }
+    };
+
+    // Animation variants for text content
+    const textVariants = {
+      initial: { y: 20, opacity: 0.9 },
+      hover: { y: 0, opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } }
+    };
+
+    const descriptionVariants = {
+      initial: { y: 30, opacity: 0, maxHeight: 0 },
+      hover: { 
+        y: 0, 
+        opacity: 1, 
+        maxHeight: 80, 
+        transition: { duration: 0.7, ease: 'easeOut' } 
+      }
+    };
+
+    // Animation variants for border
+    const borderVariants = {
+      initial: { scale: 1, opacity: 0 },
+      hover: { scale: 0.95, opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } }
+    };
+
+    return (
+      <motion.div
+        className="gallery-item group relative overflow-hidden cursor-pointer"
+        data-index={index}
+        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseLeave={() => setHoveredIndex(null)}
+        variants={containerVariants}
+        initial="initial"
+        animate={isHovered ? 'hover' : 'initial'}
+        style={{ transitionDelay: `${index * 0.1}s` }}
+      >
+        <div className="relative h-96 md:h-[500px] overflow-hidden rounded-lg">
+          {/* Image Wrapper */}
+          <div className="w-full h-full relative">
+            {/* First Image */}
+            <motion.img
+              src={item.image}
+              alt={item.title}
+              className="absolute inset-0 w-full h-full object-cover object-top"
+              variants={imageVariants}
+              loading="lazy"
+            />
+
+            {/* Second Image on Hover */}
+            <motion.img
+              src={item.image2}
+              alt={item.title}
+              className="absolute inset-0 w-full h-full object-cover object-top"
+              variants={secondImageVariants}
+              loading="lazy"
+            />
+          </div>
+
+          {/* Gradient overlay */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"
+            variants={gradientVariants}
+          />
+
+          {/* Text Content */}
+          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+            <motion.div variants={textVariants}>
+              <div className="h-[1px] bg-white w-12 mb-3"></div>
+              <p className="text-sm font-light uppercase tracking-wider mb-2">
+                {item.subtitle}
+              </p>
+            </motion.div>
+
+            <motion.h3
+              className="text-2xl md:text-3xl font-light mb-4"
+              variants={textVariants}
+            >
+              {item.title}
+            </motion.h3>
+
+            <AnimatePresence>
+              {isHovered && (
+                <motion.p
+                  className="text-sm leading-relaxed max-w-md"
+                  variants={descriptionVariants}
+                  initial="initial"
+                  animate="hover"
+                  exit="initial"
+                >
+                  {item.description}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Border on Hover */}
+          <motion.div
+            className="absolute inset-0 border-2 border-white"
+            style={{ borderRadius: '8px' }}
+            variants={borderVariants}
+          />
         </div>
-      </button>
-      <Link to={`/product/${id}`} className='w-12 h-12 bg-white flex justify-center items-center text-primary drop-shadow-xl'><BsEyeFill /></Link>
-    </div>
-  </div>
+      </motion.div>
+    );
+  };
 
-    <div>
-     <div className='text-sm capitalize xxl:text-xl text-gray-500 mb-1 dark:text-gray-200 sm:text-[23px] lg:text-[14px]'>{category}</div>
-     <Link to={`/product/${id}`}>
-      <h2 className='font-semibold mb-1 dark:text-gray-200 sm:text-[26px] md:text-[20px] lg:text-[16px] xxl:text-[18px]'>{title}</h2>
-     </Link>
-    
-      <div className='font-semibold dark:text-gray-200 sm:text-[28px] md:text-[24px] lg:text-[16px]  xxl:text-[18px]'>$ {price}</div>
-    </div>
-     
-  </div>;
+  return (
+    <section className="py-20 bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4">
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          <div className="h-[2px] bg-black dark:bg-gray-200 w-24 mx-auto mb-6"></div>
+          <h2 className="text-4xl md:text-6xl font-light mb-6 text-black dark:text-gray-200">
+            Visual <span className="font-semibold">Stories</span>
+          </h2>
+          <p className="text-gray-600 dark:text-gray-200 max-w-3xl mx-auto text-lg leading-relaxed">
+            Every image tells a story, every moment captures an emotion. 
+            Explore our collection of curated visuals that speak to the soul and inspire the imagination.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {galleryItems.map((item, index) => (
+            <GalleryItem key={item.id} item={item} index={index} />
+          ))}
+        </div>
+
+        <motion.div
+          className="text-center mt-20 py-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+        >
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-3xl md:text-4xl font-light mb-6 text-black dark:text-gray-200">
+              Where <span className="font-semibold">Art Meets Life</span>
+            </h3>
+            <p className="text-gray-600 dark:text-gray-200 text-lg leading-relaxed">
+              In every captured moment lies an infinite universe of possibilities. 
+              These images are not just photographs—they are windows into worlds of emotion, 
+              creativity, and human connection.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+
+      <style>{`
+        .gallery-item {
+          will-change: transform, opacity;
+        }
+
+        .gallery-item:nth-child(3n+1) {
+          transform-origin: left center;
+        }
+
+        .gallery-item:nth-child(3n+2) {
+          transform-origin: center center;
+        }
+
+        .gallery-item:nth-child(3n+3) {
+          transform-origin: right center;
+        }
+      `}</style>
+    </section>
+  );
 };
 
 export default Product;

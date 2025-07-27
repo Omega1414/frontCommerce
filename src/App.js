@@ -4,44 +4,54 @@ import Home from './pages/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
-import ProductDetails from './contexts/ProductDetails';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [theme, setTheme] = useState(null);
+ 
 
+  // İlk dəfə açanda localStorage yoxlanır
   useEffect(() => {
-    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-      setTheme('dark');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light';
+      setTheme(systemTheme);
+      localStorage.setItem('theme', systemTheme);
     }
-    else {
-      setTheme('light');
-    }
-  }, [])
+  }, []);
+
+  // theme dəyişəndə classList və localStorage yenilənir
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
+
+    if (theme) {
+      localStorage.setItem('theme', theme);
+    }
   }, [theme]);
 
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
-
-  return <div className='overflow-hidden dark:bg-gray-700'>
-    <Router>
-    <Header handleThemeSwitch={handleThemeSwitch} theme={theme} setTheme={setTheme} />
-      <Routes>
-        <Route path='/'  element={<Home theme={theme} />} />
-        <Route path='/product/:id' element={<ProductDetails />} />
-      </Routes>
-      <Sidebar />
-      <Footer />
-    </Router>
-    <ToastContainer
+  if (theme === null) return null;
+  return (
+    <div className='overflow-hidden'>
+      <Router>
+        <Header handleThemeSwitch={handleThemeSwitch} theme={theme} setTheme={setTheme} />
+        <Routes>
+          <Route path='/' element={<Home theme={theme} />} />
+          {/* <Route path='/product/:id' element={<ProductDetails />} /> */}
+        </Routes>
+        <Sidebar />
+        <Footer theme={theme} />
+      </Router>
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -53,7 +63,9 @@ const App = () => {
         pauseOnHover
         theme="dark"
       />
-  </div>;
+    </div>
+  );
 };
+
 
 export default App;

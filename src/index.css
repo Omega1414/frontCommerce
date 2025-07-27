@@ -3,12 +3,18 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
+html {
+  scroll-behavior: smooth;
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
 
-  html{
-    scroll-behavior: smooth;
-  },
-  body {
-    @apply font-primary text-primary !important;
-  }
- 
+body {
+  @apply font-primary text-primary;
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

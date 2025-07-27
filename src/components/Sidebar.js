@@ -11,7 +11,7 @@ const Sidebar = () => {
   const {isOpen, handleClose} = useContext(SidebarContext)
   const {cart, clearCart, total, itemAmount} = useContext(CartContext)
   
-  return <div className={`${isOpen ? 'right-0' : '-right-full'} w-full bg-white fixed top-0 h-full shadow-2xl md:w-[45vw] xl:max-w-[35vw] transition-all duration-300 z-20 px-4 lg:px-[35px] overflow-auto  dark:bg-gray-600`}>
+  return <div className={`${isOpen ? 'right-0' : '-right-full'} w-full bg-white fixed top-0 h-full shadow-2xl md:w-[45vw] xl:max-w-[35vw] transition-all duration-300 z-40 px-4 lg:px-[35px] overflow-auto  dark:bg-gray-900`}>
     <div className='flex items-center justify-between py-6 border-b'>
     <div className='uppercase text-sm font-semibold dark:text-gray-200 md:text-[18px] xxxl:text-[24px]'>Shopping Bag ({itemAmount})</div>
       <div onClick={handleClose} className='cursor-pointer w-8 h-8 flex justify-center items-center '>
@@ -30,7 +30,7 @@ const Sidebar = () => {
         </div>
       </div>
       <Link to='/' className='bg-gray-200 flex p-4 justify-center items-center text-primary w-full font-medium xxxl:text-[24px]'>View cart</Link>
-      <Link to='/' onClick={() => toast.error("Checkout is not avaliable yet")} className='bg-primary flex p-4 justify-center items-center text-white w-full font-medium xxxl:text-[24px]'>Checkout</Link>
+      <Link to='/' onClick={() => toast.error("Checkout is not avaliable yet")} className='bg-gray-700 flex p-4 justify-center items-center text-white w-full font-medium xxxl:text-[24px]'>Checkout</Link>
     </div>
   </div>;
 };

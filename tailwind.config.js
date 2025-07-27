@@ -1,9 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  optimizeFonts: false,
-  important: true,
-  darkMode: ['class'],
+  darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
   
@@ -29,11 +27,7 @@ module.exports = {
         primary: '#222222',
         secondary: '#F5E6E0',
       },
-      backgroundImage: {
-        hero: "url('./img/bg_hero.svg')",
-        lightImg: "url('./img/bg_light.jpg')",
-        darkImg: "url('./img/bg_dark.jpg')",
-      },
+     
     },
   },
   plugins: [
