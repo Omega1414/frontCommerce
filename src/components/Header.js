@@ -84,24 +84,24 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center space-x-8 relative">
-            {categories.map((category) => (
-              <div
-                key={category.path}
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(category)}
-              >
-                <Link
-                  to={category.path}
-                  className={`hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 ${
-                    isActive && theme === 'light' ? 'text-gray-900' : ''
-                  }`}
-                >
-                  {category.name}
-                </Link>
-              </div>
-            ))}
-          </nav>
+    <nav className="hidden lg:flex items-center space-x-8 relative">
+  {categories.map((category) => (
+    <div
+      key={category.path}
+      className="relative"
+      onMouseEnter={() => handleMouseEnter(category)}
+    >
+      <button
+
+        className={`hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 ${
+          isActive && theme === "light" ? "text-gray-900" : ""
+        }`}
+      >
+        {category.name}
+      </button>
+    </div>
+  ))}
+</nav>
 
           {/* Right Side */}
           <div className="flex items-center gap-4 z-30">
@@ -198,22 +198,30 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
                             loading="lazy"
                           />
                           <div className="flex flex-col justify-start">
-                            <Link
-                              to={subcategory.path}
-                              className="font-semibold text-base sm:text-lg text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
-                            >
-                              {subcategory.name}
-                            </Link>
+                           <Link
+  to={subcategory.path}
+  onClick={(e) => {
+    e.preventDefault();
+    toast.info("Not available yet")
+  }}
+  className="font-semibold text-base sm:text-lg text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
+>
+  {subcategory.name}
+</Link>
                             {subcategory.nested && subcategory.nested.length > 0 && (
                               <div className="mt-2 space-y-1 sm:space-y-2 w-[130px]">
                                 {subcategory.nested.map((nested) => (
-                                  <Link
-                                    key={nested.path}
-                                    to={nested.path}
-                                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors duration-200"
-                                  >
-                                    {nested.name}
-                                  </Link>
+                                 <Link
+  key={nested.path}
+  to={nested.path}
+  onClick={(e) => {
+    e.preventDefault();
+       toast.info("Not available yet")
+  }}
+  className="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors duration-200"
+>
+  {nested.name}
+</Link>
                                 ))}
                               </div>
                             )}
@@ -263,7 +271,7 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
                           : setIsMobileMenuOpen(false)
                       }
                     >
-                      <Link to={cat.path}>{cat.name}</Link>
+                      <Link>{cat.name}</Link>
                       {cat.subcategories.length > 0 && <HiOutlineChevronRight />}
                     </div>
                   </div>
@@ -287,8 +295,11 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
                     <div key={sub.path}>
                       <div className="flex justify-between items-center cursor-pointer text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
                         <Link
-                          to={sub.path}
-                          onClick={() => setIsMobileMenuOpen(false)}
+                         onClick={(e) => {
+    e.preventDefault();
+    toast.info("Not available yet")
+    setIsMobileMenuOpen(false)
+  }}
                         >
                           {sub.name}
                         </Link>
@@ -300,8 +311,12 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
                           {sub.nested.map((nested) => (
                             <Link
                               key={nested.path}
-                              to={nested.path}
-                              onClick={() => setIsMobileMenuOpen(false)}
+                              onClick={(e) => {
+    e.preventDefault();
+    toast.info("Not available yet")
+    setIsMobileMenuOpen(false)
+  }}
+                         
                               className="block text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
                             >
                               {nested.name}
