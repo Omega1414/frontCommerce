@@ -9,17 +9,18 @@ import "./home.css"; // animasiyalar üçün CSS
 export default function Home({ theme }) {
   const scrollRef = useRef(null);
 
+useEffect(() => {
+  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
 
-  useEffect(() => {
-    const scroll = new LocomotiveScroll({
-      el: scrollRef.current,
-      smooth: true,
-      multiplier: 0.7, // scroll sürətini yavaşlatdıq
-      inertia: 0.75,
-    });
+  const scroll = new LocomotiveScroll({
+    el: scrollRef.current,
+    smooth: !isMobile, // mobildə smooth scroll-u söndür
+    multiplier: 0.7,
+    inertia: 0.75,
+  });
 
-    return () => scroll.destroy();
-  }, []);
+  return () => scroll.destroy();
+}, []);
 
   return (
     <div ref={scrollRef} data-scroll-container>
