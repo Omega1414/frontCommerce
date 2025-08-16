@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,7 +40,10 @@ const App = () => {
   };
   if (theme === null) return null;
   return (
-    <div className='overflow-hidden'>
+    <div className='overflow-hidden'   style={{
+        backgroundColor: theme === "dark" ? "#111827" : "#fff",
+        transition: "background-color 0.3s ease",
+      }}>
       <Router>
         <Header handleThemeSwitch={handleThemeSwitch} theme={theme} setTheme={setTheme} />
         <Routes>
@@ -49,7 +51,7 @@ const App = () => {
           {/* <Route path='/product/:id' element={<ProductDetails />} /> */}
         </Routes>
         <Sidebar />
-        <Footer theme={theme} />
+      
       </Router>
       <ToastContainer
         position="bottom-center"

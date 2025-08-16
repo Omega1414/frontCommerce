@@ -1,0 +1,10 @@
+.section {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* bounce-in right */
+}
+
+.section.is-inview {
+  opacity: 1;
+  transform: translateX(0);
+}

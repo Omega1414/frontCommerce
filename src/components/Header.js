@@ -51,7 +51,7 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
   return (
     <>
       <header
-        className={`fixed w-full z-30 transition-all ease-in-out duration-500
+        className={`fixed w-full z-40 transition-all ease-in-out duration-500
           ${isActive
             ? theme === 'light'
               ? 'bg-gray-100 py-4 shadow-md bg-opacity-80'
