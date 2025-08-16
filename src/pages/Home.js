@@ -10,14 +10,21 @@ export default function Home({ theme }) {
   const scrollRef = useRef(null);
 
 useEffect(() => {
-  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
 
-  const scroll = new LocomotiveScroll({
-    el: scrollRef.current,
-    smooth: !isMobile, // mobildə smooth scroll-u söndür
-    multiplier: 0.7,
-    inertia: 0.75,
-  });
+
+const scroll = new LocomotiveScroll({
+  el: scrollRef.current,
+  smooth: true,
+  multiplier: 0.85,
+  inertia: 0.75,
+  smartphone: {
+    smooth: true, // mobil üçün smooth scroll
+  },
+  tablet: {
+    smooth: true,
+  },
+});
+
 
   return () => scroll.destroy();
 }, []);
