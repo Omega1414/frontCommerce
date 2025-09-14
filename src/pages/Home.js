@@ -17,9 +17,10 @@ const scroll = new LocomotiveScroll({
   smooth: true,
   multiplier: 0.7,
   inertia: 0.75,
-  smartphone: {
-    smooth: true, // mobil üçün smooth scroll
-  },
+   smartphone: {
+      smooth: true,
+      multiplier: 1.5,   // mobil üçün sürət artırıldı
+    },
   tablet: {
     smooth: true,
   },

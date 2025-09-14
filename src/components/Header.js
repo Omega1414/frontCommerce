@@ -32,7 +32,10 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
       smooth: true,
       multiplier: 0.7,
       inertia: 0.75,
-      smartphone: { smooth: true },
+       smartphone: {
+      smooth: true,
+      multiplier: 1.5,   // mobil üçün sürət artırıldı
+    },
       tablet: { smooth: true },
     });
 
