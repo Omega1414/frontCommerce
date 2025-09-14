@@ -9,7 +9,8 @@ import { IoMoon, IoSunny } from 'react-icons/io5';
 import { HiOutlineMenu, HiOutlineArrowNarrowLeft, HiOutlineChevronRight } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import categories from './Categories';
-
+import LocomotiveScroll from "locomotive-scroll";
+import "locomotive-scroll/dist/locomotive-scroll.css";
 const Header = ({ theme, setTheme, handleThemeSwitch }) => {
   const [isActive, setIsActive] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
@@ -20,13 +21,28 @@ const Header = ({ theme, setTheme, handleThemeSwitch }) => {
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { itemAmount } = useContext(CartContext);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsActive(window.scrollY > 60);
-    };
+   useEffect(() => {
+    // LocomotiveScroll-un instansını tapmalıyıq
+    const scrollEl = document.querySelector("[data-scroll-container]");
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (!scrollEl) return;
+
+    const scroll = new LocomotiveScroll({
+      el: scrollEl,
+      smooth: true,
+      multiplier: 0.7,
+      inertia: 0.75,
+      smartphone: { smooth: true },
+      tablet: { smooth: true },
+    });
+
+    // Locomotive Scroll scroll event
+    scroll.on("scroll", (obj) => {
+      // obj.scroll.y → scroll mövqeyi
+      setIsActive(obj.scroll.y > 60);
+    });
+
+    return () => scroll.destroy();
   }, []);
 
   const handleMouseEnter = (category) => {

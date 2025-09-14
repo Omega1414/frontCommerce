@@ -15,7 +15,7 @@ useEffect(() => {
 const scroll = new LocomotiveScroll({
   el: scrollRef.current,
   smooth: true,
-  multiplier: 0.85,
+  multiplier: 0.7,
   inertia: 0.75,
   smartphone: {
     smooth: true, // mobil üçün smooth scroll
